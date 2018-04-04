@@ -27,9 +27,9 @@ for i in range(0,2):
 #print(images)
 	with open(txtimage[i],'w') as txtima:
 		for image in images:
-			for pixel in image:
-				if pixel > 0:
-					pixel = 1
+			for j in range(len(image)):
+				if image[j] > 0:
+					image[j] = 1
 			imagetxt = ",".join(str(x) for x in image)
 			txtima.write(imagetxt+'\n')
 
