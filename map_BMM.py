@@ -43,8 +43,8 @@ for line in sys.stdin:
 		q_numer_sum[i] += gamma[i] * pixels
 	
 for i in range(0,10):
-	print(str(i)+"\t"+str(pi_numer_sum[i])+":"+",".join(str(x) for x in q_numer_sum[i]))
-print("__CNT__"+'\t'+str(cnt))
+	print(str(i)+"\t"+str(cnt)+":"+str(pi_numer_sum[i])+":"+",".join(str(x) for x in q_numer_sum[i]))
+
 
 
 

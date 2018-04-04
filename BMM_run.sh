@@ -1,26 +1,26 @@
 #!/bin/bash
 
-OUT_FILE=/user/ChanCarsten/hw1a
-IN_FILE=/user/ChanCarsten/input/image_train.txt
-kmean () {
+OUT_FILE=/user/ChanCarsten/out_BMM
+IN_FILE=/user/ChanCarsten/input_BMM/image_train.txt
+BMM () {
 hadoop dfs -rm -R $OUT_FILE
 hadoop jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
 -D mapred.map.tasks=10 \
 -D mapred.reduce.tasks=10 \
--file $PWD/train_centroid.txt \
--file $PWD/map_kmean.py -mapper map_kmean.py \
--file $PWD/red_kmean.py -reducer red_kmean.py \
+-file $PWD/train_paras.txt \
+-file $PWD/map_BMM.py -mapper map_BMM.py \
+-file $PWD/red_BMM.py -reducer red_BMM.py \
 -input $IN_FILE \
 -output $OUT_FILE
-hadoop fs -getmerge $OUT_FILE ./centroid_result.txt
+hadoop fs -getmerge $OUT_FILE ./paras_result.txt
 }
 echo $PWD
-kmean
+BMM
 converging=( $(./check_converge.py) )
 while [ ${converging[0]} = 1 ]; do
-mv centroid_result.txt train_centroid.txt
+mv paras_result.txt train_centroid.txt
 echo ${converging[1]} >> log.txt
-kmean
+BMM
 converging=( $(./check_converge.py) )
 done
 

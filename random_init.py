@@ -22,8 +22,8 @@ with open(centroid_f, "w") as cenf:
 	for candidate in candidates:
 		for j in range(len(candidate)):
 			if candidate[j] == 1:
-				candidate[j] = 0.95
+				candidate[j] = 0.9
 			else:
-				candidate[j] = 0.05
+				candidate[j] = 0.1
 		cenf.write(str(i)+'\t'+str(pi_k)+":"+",".join(str(x) for x in candidate)+'\n')
 		i+=1
