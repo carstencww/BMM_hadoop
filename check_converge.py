@@ -1,31 +1,38 @@
 #!/usr/bin/env python
 import numpy as np
 
-origin_centroid = [0]*10
-
-with open("./train_centroid.txt","r") as cens:
-	for cen in cens:
-		cen = cen.strip()
-		class_no , centroid = cen.split('\t')
+origin_q = [0]*10
+origin_pi = [0]*10
+with open("./train_paras.txt","r") as paras:
+	for para in paras:
+		para = para.strip()
+		class_no , para  = para.split('\t')
 		class_no = int(class_no)
-		centroid = centroid.split(",")
-		origin_centroid[class_no] = [float(x) for x in centroid]
-origin_centroid = np.asarray(origin_centroid)
+		pi , q =  para.split(":")
+		origin_pi[class_no] = float(pi)
+		q = q.split(",")
+		origin_q[class_no] = [float(x) for x in q]
+origin_q = np.asarray(origin_q)
+origin_pi = np.asarray(origin_pi)
 
-
-result_centroid = [0]*10
-
-with open("./centroid_result.txt","r") as cens:
-	for cen in cens:
-		cen = cen.strip()
-		class_no , centroid = cen.split('\t')
+result_q = [0]*10
+result_pi = [0]*10
+with open("./paras_result.txt","r") as paras:
+	for para in paras:
+		para = para.strip()
+		class_no , para  = para.split('\t')
 		class_no = int(class_no)
-		centroid = centroid.split(",")
-		result_centroid[class_no] = [float(x) for x in centroid]
-result_centroid = np.asarray(result_centroid)
-diff = np.linalg.norm(origin_centroid - result_centroid, axis=1)
+		pi , q =  para.split(":")
+		result_pi[class_no] = float(pi)
+		q = q.split(",")
+		result_q[class_no] = [float(x) for x in q]
+result_q = np.asarray(result_q)
+result_pi = np.asarray(result_pi)
+
+diff = np.linalg.norm(origin_q - result_q, axis=1)
 dist = diff.sum()
-if dist<0.0001:
+dist += np.linalg.norm(origin_pi - result_pi)
+if dist<0.00001:
 	print("0")
 else: 
 	print("1")

@@ -1,2 +1,4 @@
+*.crc
+*.pyc
 raw_data/
 data/
