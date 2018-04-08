@@ -23,7 +23,7 @@ with open("../data/image_test.txt","r") as images:
 		image = image.split(",")
 		image = [int(x) for x in image]
 		for i in range(0,10):
-			gamma[i] = result_pi[i]
+			gamma[i] =  result_pi[i]
 			for j in range(len(image)):
 				if image[j] == 1:
 					gamma[i] *= result_q[i][j]
@@ -49,6 +49,7 @@ for i in range(10):
 	count = np.zeros(10)
 	for j in range(len(class_cnt[i])):
 		count[true_label[class_cnt[i][j]]]+=1
+	print(str(i)+": "+str(count))
 	major_labels[i] = count.argmax()
 	correct_images[i] = count[major_labels[i]]
 Accuracy = [float(correct_images[i])/Num_images[i] for i in range(10)]
