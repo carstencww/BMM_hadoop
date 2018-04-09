@@ -31,5 +31,5 @@ with open("../data/image_train.txt","r") as images:
 		class_no = gamma.argmax()
 		class_cnt[class_no]+=1
 for i in range(0,10):
-	print("Parameter "+str(i)+": "+str(result_pi[i])+": ["+", ".join(str(x) for x in result_q[i])+"], "+str(class_cnt[i]))
+	print("Parameter "+str(i)+": "+"{0:0.2f}".format(result_pi[i])+": ["+", ".join("{0:0.2f}".format(x) for x in result_q[i])+"], "+str(class_cnt[i]))
 #print(class_cnt)

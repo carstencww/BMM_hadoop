@@ -30,6 +30,7 @@ with open("../data/image_test.txt","r") as images:
 				else:
 					gamma[i] *= 1 - result_q[i][j]
 		class_no = gamma.argmax()
+		print(gamma)
 		class_cnt[class_no].append(idx)
 		idx += 1
 
@@ -49,7 +50,7 @@ for i in range(10):
 	count = np.zeros(10)
 	for j in range(len(class_cnt[i])):
 		count[true_label[class_cnt[i][j]]]+=1
-	print(str(i)+": "+str(count))
+	#print(str(i)+": "+str(count))
 	major_labels[i] = count.argmax()
 	correct_images[i] = count[major_labels[i]]
 Accuracy = [float(correct_images[i])/Num_images[i] for i in range(10)]
